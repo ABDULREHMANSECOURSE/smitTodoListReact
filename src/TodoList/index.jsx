@@ -30,6 +30,9 @@ const TodoList = () => {
                 <input type="text" placeholder='Add a new task' ref={inputRef} />
                 <button onClick={() => addTodo(inputRef.current.value)}>Add</button>
                 <button onClick={() => {
+                    window.location.href = 'profile'
+                }}>Profile</button>
+                <button onClick={() => {
                     localStorage.removeItem('loggedInUser');
                     window.location.href = '/login';
             }}>Logout</button>

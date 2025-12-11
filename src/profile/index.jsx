@@ -10,6 +10,13 @@ const Profile = () => {
         <h1>Profile</h1>
         <p>Username: {loggedInUser?.username}</p>
         <p>Email: {loggedInUser?.email}</p>
+        <button onClick={() => {
+            window.location.href = '/';
+        }}>Back to Todo List</button>
+        <button onClick={() => {
+            localStorage.removeItem('loggedInUser');
+            window.location.href = '/login';
+        }}>Logout</button>
     </div>
   )
 }
