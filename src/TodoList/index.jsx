@@ -1,44 +1,52 @@
-import {useRef} from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const TodoList = () => {
-    // const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+    const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
     if (!loggedInUser) {
         window.location.href = '/login';
     }
+
+    const [todos, setTodos] = useState([]);
+
     const inputRef = useRef(null);
-    function createTodos(text, completed = false) {
-        const todo = document.createElement('div');
-        todo.className = 'todoItem';
-        const completeBtn = document.createElement('button');
-        completeBtn.checked = completed;
-        completeBtn.innerText = completed ? 'Completed' : 'Complete';
-        const span = document.createElement('span');
-        span.innerText = text;
-        const deleteBtn = document.createElement('button');
-        deleteBtn.innerText = 'Delete';
-        deleteBtn.onclick = () => {
-            todo.remove();
-        };
-        completeBtn.onclick = () => {
-            completeBtn.checked = !completeBtn.checked;
-            completeBtn.checked ? span.style.textDecoration = 'line-through' : span.style.textDecoration = 'none';
-            completeBtn.innerText = completeBtn.checked ? 'Completed' : 'Complete';
-        }
-        todo.appendChild(completeBtn);
-        todo.appendChild(span);
-        todo.appendChild(deleteBtn);
-        document.querySelector('.todoList').appendChild(todo);
+
+    function addTodo(text, completed = false) {
+        setTodos(prev => [...prev, { text, completed, id: Date.now() }]);
     }
-  return (
-    <div>
-        <span className='addTodo'>
-            <input type="text" placeholder='Add a new task' ref={inputRef}/>
-            <button onClick={() => createTodos(inputRef.current.value)}>Add</button>
-        </span>
-        <span className='todoList'></span>
-    </div>
-  )
+    useEffect(() => {
+        console.log(todos)
+        const userIndex = accounts.findIndex(acc => acc.id === loggedInUser.id);
+        if (userIndex !== -1) {
+            accounts[userIndex].tasks = todos;
+            localStorage.setItem('accounts', JSON.stringify(accounts));
+            localStorage.setItem('loggedInUser', JSON.stringify(accounts[userIndex]));
+        }
+    }, [todos]);
+
+    return (
+        <div>
+            <span className='addTodo'>
+                <input type="text" placeholder='Add a new task' ref={inputRef} />
+                <button onClick={() => addTodo(inputRef.current.value)}>Add</button>
+            </span>
+            <span className='todoList'>
+                {todos.map(todo => (
+                    <div className="todoItem" key={todo.id}>
+                        <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>{todo.text}</span>
+                        <button onClick={(e) => {
+                            setTodos(todos.map(t =>
+                                t.id === todo.id ? { ...t, completed: !t.completed } : t
+                            ));
+                        }}>{todo.completed ? 'Completed' : 'Complete'}</button>
+                        <button onClick={(e) => {
+                            setTodos(todos.filter(t => t.id !== todo.id));
+                        }}>Delete</button>
+                    </div>
+                ))}
+            </span>
+        </div>
+    )
 }
 
 export default TodoList

@@ -2,6 +2,9 @@ import React from 'react'
 
 const Profile = () => {
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    if (!loggedInUser) {
+        window.location.href = '/login';
+    }
   return (
     <div>
         <h1>Profile</h1>
