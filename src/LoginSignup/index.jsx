@@ -1,6 +1,5 @@
 import React, { useRef } from 'react'
 import './style.css'
-// import arpLogo from './assets/arpLogo.png'
 const LoginSignup = () => {
   const signUpBox = useRef(null);
   const logInBox = useRef(null);
@@ -51,7 +50,6 @@ const LoginSignup = () => {
   return (
     <>
       <span className='container'>
-        {/* <img src={arpLogo} alt="ARP Logo" /> */}
         <span className='signUp' ref={signUpBox}>
           <h2>Sign Up</h2>
           <input type="text" placeholder='Username' ref={usernameRef} />
