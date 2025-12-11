@@ -44,7 +44,7 @@ const TodoList = () => {
             <span className='todoList'>
                 {todos.map(todo => (
                     <div className="todoItem" key={todo.id}>
-                        <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>{todo.text}</span>
+                        <h3 style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>{todo.text}</h3>
                         <button onClick={(e) => {
                             setTodos(todos.map(t =>
                                 t.id === todo.id ? { ...t, completed: !t.completed } : t
