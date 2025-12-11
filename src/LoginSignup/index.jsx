@@ -23,6 +23,8 @@ const LoginSignup = () => {
     passwordRef.current.value = '';
 
     signUpBox.current.style.display = 'none';
+    logInBox.current.style.display = 'block';
+    alert('Account created successfully! Please log in.');
   }
 
   const liEmailRef = useRef(null);
