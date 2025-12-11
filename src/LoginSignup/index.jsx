@@ -5,7 +5,10 @@ const LoginSignup = () => {
   const signUpBox = useRef(null);
   const logInBox = useRef(null);
   const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
-  // const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+  const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+  if (loggedInUser) {
+    window.location.href = '/';
+  }
 
   const usernameRef = useRef(null);
   const emailRef = useRef(null);
