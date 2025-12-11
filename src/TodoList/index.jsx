@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 const TodoList = () => {
     const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
@@ -32,13 +33,10 @@ const TodoList = () => {
             <span className='addTodo'>
                 <input type="text" placeholder='Add a new task' ref={inputRef} />
                 <button onClick={() => addTodo(inputRef.current.value)}>Add</button>
-                <button onClick={() => {
-                    window.location.href = 'profile'
-                }}>Profile</button>
-                <button onClick={() => {
+                <button><Link to="/profile">Profile</Link></button>
+                <button><Link to="/login" onClick={() => {
                     localStorage.removeItem('loggedInUser');
-                    window.location.href = '/login';
-            }}>Logout</button>
+                }}>Logout</Link></button>
                 <h1>{todos.length} Tasks</h1>
             </span>
             <span className='todoList'>
