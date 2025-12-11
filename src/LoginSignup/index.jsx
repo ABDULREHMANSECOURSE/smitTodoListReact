@@ -37,6 +37,7 @@ const LoginSignup = () => {
     if (account) {
       alert('Login successful');
       localStorage.setItem('loggedInUser', JSON.stringify(account));
+        window.location.href = '/';
     } else {
       alert('Invalid email or password');
     }
