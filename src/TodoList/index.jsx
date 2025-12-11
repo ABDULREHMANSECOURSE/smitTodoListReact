@@ -8,6 +8,9 @@ const TodoList = () => {
     }
 
     const [todos, setTodos] = useState([]);
+    useEffect(() => {
+        setTodos(loggedInUser.tasks);
+    }, []);
 
     const inputRef = useRef(null);
 
