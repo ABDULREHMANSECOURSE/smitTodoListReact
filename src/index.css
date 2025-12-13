@@ -37,3 +37,7 @@ code {
   background-color: #ffc107;
   color: black;
 }
+
+.signUp{
+    display: none;
+}

@@ -2,8 +2,6 @@ import React, { use, useEffect, useRef } from 'react'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from 'react-router-dom';
-import './style.css'
-
 
 const LoginSignup = () => {
   const signUpBox = useRef(null);
