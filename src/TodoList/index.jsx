@@ -3,6 +3,36 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const TodoList = () => {
+    const editInputRef = useRef(null);
+    const [editingId, setEditingId] = useState(null);
+    const [editText, setEditText] = useState('');
+
+    const startEdit = (todo) => {
+        setEditingId(todo.id);
+        setEditText(todo.text);
+    };
+    
+    useEffect(() => {
+        if (editingId !== null) {
+            editInputRef.current.focus();
+        }
+    }, [editingId]);
+
+    const saveEdit = (id) => {
+        if (editText.trim() === '') {
+            toast.error('Task cannot be empty');
+            return;
+        }
+
+        setTodos(todos.map(t =>
+            t.id === id ? { ...t, text: editText } : t
+        ));
+
+        setEditingId(null);
+        setEditText('');
+    };
+
+
     const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
     useEffect(() => {
@@ -26,6 +56,7 @@ const TodoList = () => {
         }
         setTodos(prev => [...prev, { text, completed, id: Date.now() }]);
         inputRef.current.value = '';
+        inputRef.current.focus();
     }
     useEffect(() => {
         const userIndex = accounts.findIndex(acc => acc.id === loggedInUser.id);
@@ -72,14 +103,33 @@ const TodoList = () => {
             <span className='todoList'>
                 {todos.map(todo => (
                     <div className={`todoItem ${todo.completed ? 'done' : ''}`} key={todo.id}>
-                        <h3>{todo.text}</h3>
+
+                        {editingId === todo.id ? (
+                            <input
+                                type="text"
+                                value={editText}
+                                onChange={(e) => setEditText(e.target.value)}
+                                ref={editInputRef}
+                                className="todoInput"
+                            />
+                        ) : (
+                            <h3>{todo.text}</h3>
+                        )}
 
                         <div className="todoActions">
+
+                            {editingId === todo.id ? (
+                                <button className="primaryBtn" onClick={() => saveEdit(todo.id)}> Save </button>
+                            ) : (
+                                <button className="secondaryBtn" onClick={() => startEdit(todo)}> Edit </button>)}
+
                             <button
                                 className="successBtn"
                                 onClick={() =>
                                     setTodos(todos.map(t =>
-                                        t.id === todo.id ? { ...t, completed: !t.completed } : t
+                                        t.id === todo.id
+                                            ? { ...t, completed: !t.completed }
+                                            : t
                                     ))
                                 }
                             >
@@ -92,6 +142,7 @@ const TodoList = () => {
                             >
                                 Delete
                             </button>
+
                         </div>
                     </div>
                 ))}
