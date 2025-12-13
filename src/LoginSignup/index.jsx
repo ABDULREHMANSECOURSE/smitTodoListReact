@@ -1,13 +1,23 @@
-import React, { useRef } from 'react'
+import React, { use, useEffect, useRef } from 'react'
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from 'react-router-dom';
 import './style.css'
+
+
 const LoginSignup = () => {
   const signUpBox = useRef(null);
   const logInBox = useRef(null);
   const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
   const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-  if (loggedInUser) {
-    window.location.href = '/';
-  }
+
+  const Navigate = useNavigate();
+
+  useEffect(() => {
+    if (loggedInUser) {
+      Navigate('/');
+    }
+  }, []);
 
   const usernameRef = useRef(null);
   const emailRef = useRef(null);
@@ -16,6 +26,14 @@ const LoginSignup = () => {
     const username = usernameRef.current.value;
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
+    if (username === '' || email === '' || password === '') {
+      toast.error('Please fill all fields');
+      return;
+    }
+    if (accounts.some(acc => acc.email === email)) {
+      toast.error('Account with this email already exists');
+      return;
+    }
     const userData = { username, email, password, id: Date.now(), tasks: [] };
     accounts.push(userData);
     localStorage.setItem('accounts', JSON.stringify(accounts));
@@ -35,15 +53,25 @@ const LoginSignup = () => {
   const handleLogIn = () => {
     const email = liEmailRef.current.value;
     const password = liPasswordRef.current.value;
+    if (email === '' || password === '') {
+      toast.error('Please fill all fields');
+      return;
+    }
+
+    if (!accounts.some(acc => acc.email === email)) {
+      toast.error('No account found with this email');
+      return;
+    }
+
     const account = accounts.find(acc => acc.email === email && acc.password === password);
 
 
     if (account) {
-      alert('Login successful');
       localStorage.setItem('loggedInUser', JSON.stringify(account));
-        window.location.href = '/';
+      toast.success('Login successful');
+      Navigate('/');
     } else {
-      alert('Invalid email or password');
+      toast.error('Invalid email or password');
     }
   }
 
