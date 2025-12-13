@@ -11,14 +11,14 @@ const TodoList = () => {
         }
     }, []);
 
-    
+
     const [todos, setTodos] = useState([]);
     useEffect(() => {
         setTodos(loggedInUser.tasks);
     }, []);
 
     const inputRef = useRef(null);
-    
+
     function addTodo(text, completed = false) {
         if (text.trim() === '') {
             toast.error('Task cannot be empty');
@@ -58,7 +58,8 @@ const TodoList = () => {
                         }}>{todo.completed ? 'Completed' : 'Complete'}</button>
                         <button onClick={(e) => {
                             setTodos(todos.filter(t => t.id !== todo.id));
-                        }}>Delete</button>
+                        }
+                        }>Delete</button>
                     </div>
                 ))}
             </span>
