@@ -19,6 +19,10 @@ const TodoList = () => {
     const inputRef = useRef(null);
 
     function addTodo(text, completed = false) {
+        if (text.trim() === '') {
+            toast.error('Task cannot be empty');
+            return;
+        }
         setTodos(prev => [...prev, { text, completed, id: Date.now() }]);
     }
     useEffect(() => {
