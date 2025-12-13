@@ -44,7 +44,7 @@ const LoginSignup = () => {
 
     signUpBox.current.style.display = 'none';
     logInBox.current.style.display = 'block';
-    alert('Account created successfully! Please log in.');
+    toast.success('Account created successfully! Please log in.');
   }
 
   const liEmailRef = useRef(null);
