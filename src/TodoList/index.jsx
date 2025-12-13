@@ -8,6 +8,11 @@ const TodoList = () => {
     if (!loggedInUser) {
         window.location.href = '/login';
     }
+    useEffect(() => {
+        if (!loggedInUser) {
+            window.location.href = '/login';
+        }
+    }, []);
 
     const [todos, setTodos] = useState([]);
     useEffect(() => {

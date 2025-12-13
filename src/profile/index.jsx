@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Profile = () => {
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
@@ -14,6 +15,7 @@ const Profile = () => {
             <button><Link to="/">Back to Todo List</Link></button>
             <button><Link to="/login" onClick={() => {
                 localStorage.removeItem('loggedInUser');
+                toast.info('Logged out successfully');
             }}>Logout</Link></button>
         </div>
     )
