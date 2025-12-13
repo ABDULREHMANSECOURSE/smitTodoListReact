@@ -5,9 +5,6 @@ import { toast } from 'react-toastify';
 const TodoList = () => {
     const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-    if (!loggedInUser) {
-        window.location.href = '/login';
-    }
     useEffect(() => {
         if (!loggedInUser) {
             window.location.href = '/login';
