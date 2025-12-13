@@ -12,7 +12,7 @@ const Profile = () => {
             <h1>Profile</h1>
             <p>Username: {loggedInUser?.username}</p>
             <p>Email: {loggedInUser?.email}</p>
-            <button><Link to="/">Back to Todo List</Link></button>
+            <button><Link to="/" >Back to Todo List</Link></button>
             <button><Link to="/login" onClick={() => {
                 localStorage.removeItem('loggedInUser');
                 toast.info('Logged out successfully');

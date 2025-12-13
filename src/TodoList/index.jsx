@@ -11,13 +11,14 @@ const TodoList = () => {
         }
     }, []);
 
+    
     const [todos, setTodos] = useState([]);
     useEffect(() => {
         setTodos(loggedInUser.tasks);
     }, []);
 
     const inputRef = useRef(null);
-
+    
     function addTodo(text, completed = false) {
         if (text.trim() === '') {
             toast.error('Task cannot be empty');
