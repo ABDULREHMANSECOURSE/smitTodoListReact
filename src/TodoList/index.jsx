@@ -22,7 +22,6 @@ const TodoList = () => {
         setTodos(prev => [...prev, { text, completed, id: Date.now() }]);
     }
     useEffect(() => {
-        console.log(todos)
         const userIndex = accounts.findIndex(acc => acc.id === loggedInUser.id);
         if (userIndex !== -1) {
             accounts[userIndex].tasks = todos;
