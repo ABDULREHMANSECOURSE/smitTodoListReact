@@ -222,3 +222,10 @@ input::placeholder {
 .signUp{
     display: none;
 }
+
+.todoInput {
+    margin: 10px 0;
+    border: none;
+    color: #fff;
+    width: 100%;
+}
