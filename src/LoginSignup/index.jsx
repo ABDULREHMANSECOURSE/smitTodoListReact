@@ -41,7 +41,7 @@ const LoginSignup = () => {
     passwordRef.current.value = '';
 
     signUpBox.current.style.display = 'none';
-    logInBox.current.style.display = 'block';
+    logInBox.current.style.display = 'flex';
     toast.success('Account created successfully! Please log in.');
   }
 
@@ -75,27 +75,32 @@ const LoginSignup = () => {
 
   return (
     <>
-      <span className='container'>
-        <span className='signUp' ref={signUpBox}>
+      <span className='authPage'>
+        <span className='authBox signUp' ref={signUpBox}>
           <h2>Sign Up</h2>
           <input type="text" placeholder='Username' ref={usernameRef} />
           <input type="email" placeholder='Email' ref={emailRef} />
           <input type="password" placeholder='Password' ref={passwordRef} />
-          <button onClick={handleSignUp}>Sign Up</button>
-          <button onClick={() => {
+          <button className="primaryBtn" onClick={handleSignUp}>Sign Up</button>
+          <button className="linkBtn" onClick={() => {
             signUpBox.current.style.display = 'none';
-            logInBox.current.style.display = 'block';
-          }}>Already have an account? Log In</button>
+            logInBox.current.style.display = 'flex';
+          }}>
+            Already have an account? Log In
+          </button>
         </span>
-        <span className='logIn' ref={logInBox}>
+
+        <span className='authBox logIn' ref={logInBox}>
           <h2>Log In</h2>
           <input type="email" placeholder='Email' ref={liEmailRef} />
           <input type="password" placeholder='Password' ref={liPasswordRef} />
-          <button onClick={handleLogIn}>Log In</button>
-          <button onClick={() => {
+          <button className="primaryBtn" onClick={handleLogIn}>Log In</button>
+          <button className="linkBtn" onClick={() => {
             logInBox.current.style.display = 'none';
-            signUpBox.current.style.display = 'block';
-          }}>Dont have an account? Sign Up</button>
+            signUpBox.current.style.display = 'flex';
+          }}>
+            Dont have an account? Sign Up
+          </button>
         </span>
       </span>
     </>

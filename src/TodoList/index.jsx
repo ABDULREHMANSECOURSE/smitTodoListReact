@@ -25,6 +25,7 @@ const TodoList = () => {
             return;
         }
         setTodos(prev => [...prev, { text, completed, id: Date.now() }]);
+        inputRef.current.value = '';
     }
     useEffect(() => {
         const userIndex = accounts.findIndex(acc => acc.id === loggedInUser.id);
