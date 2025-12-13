@@ -1,8 +1,6 @@
 import React, { useRef } from 'react'
-import Popup from '../components/Popup'
 import './style.css'
 const LoginSignup = () => {
-  <Popup message="This is a demo application. Please do not use real credentials to sign up or log in." type="info" />
   const signUpBox = useRef(null);
   const logInBox = useRef(null);
   const accounts = JSON.parse(localStorage.getItem('accounts')) || [];

@@ -1,21 +1,20 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Popup from "./components/Popup";
-import LoginSignup from "./LoginSignup";
-import Profile from "./profile";
-import TodoList from "./TodoList";
+import React from 'react';
+import LoginSignup from './LoginSignup';
+import Profile from './profile';
+import TodoList from './TodoList';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 
 function App() {
   return (
-    <Popup>
+    <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<TodoList />} />
-          <Route path="/login" element={<LoginSignup />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/login' element={<LoginSignup />} />
+          <Route path='/' element={<TodoList />} />
         </Routes>
       </BrowserRouter>
-    </Popup>
+    </>
   );
 }
 
