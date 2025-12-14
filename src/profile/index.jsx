@@ -30,9 +30,7 @@ const Profile = () => {
                             onClick={() => {
                                 localStorage.removeItem('loggedInUser');
                                 toast.info('Logged out successfully');
-                            }}
-                        >
-                            Logout
+                            }}> Logout
                         </Link>
                     </button>
                 </div>
