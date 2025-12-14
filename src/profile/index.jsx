@@ -1,12 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-    if (!loggedInUser) {
-        window.location.href = '/login';
-    }
+    const navigate = useNavigate();
+    React.useEffect(() => {
+        if (!loggedInUser) {
+            navigate('/login');
+        }
+    }, [loggedInUser, navigate]);
     return (
         <div className="profilePage">
             <div className="profileCard">
