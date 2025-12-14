@@ -10,7 +10,7 @@ const Profile = () => {
         if (!loggedInUser) {
             navigate('/login');
         }
-    }, [loggedInUser, navigate]);
+    }, [loggedInUser]);
     return (
         <div className="profilePage">
             <div className="profileCard">
